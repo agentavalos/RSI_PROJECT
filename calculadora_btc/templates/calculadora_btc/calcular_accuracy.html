@@ -1,0 +1,50 @@
+<!-- calculadora_btc/templates/calculadora_btc/calcular_accuracy.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSI Bitcoin Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select {
+            margin-bottom: 16px;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>RSI Bitcoin Calculator</h1>
+    <form method="post" action="{% url 'calcular_accuracy' %}">
+        {% csrf_token %}
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+        <label for="crypto">Select Cryptocurrency:</label>
+        <select name="crypto" id="crypto">
+            <option value="BTC">Bitcoin (BTC)</option>
+            <option value="LTC">Litecoin (LTC)</option>
+            <option value="ETH">Ethereum (ETH)</option>
+        </select>
+        <br>
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date" id="start_date" required>
+        <br>
+        <label for="end_date">End Date:</label>
+        <input type="date" name="end_date" id="end_date" required>
+        <br>
+        <input type="submit" value="Calculate Accuracy">
+    </form>
+</body>
+</html>
